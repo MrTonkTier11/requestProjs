@@ -1,0 +1,60 @@
+# token: <FirstName-LastName-Last4ID>
+# just edit line 1, ganyan daw kasi sabi lagay ng personal token. 
+
+def get_words():
+    words = []
+
+    while True:
+        #asks the user to input
+        word = input("Enter words as many as you like or press 0 to stop: ").strip()
+
+        # stop condition
+        if word == "0":
+            break
+
+        # checking if the input is alphanumeric
+        if not word.isalpha():
+            print("Invalid input. Please enter alphabetic characters only.")
+            continue
+
+        # for duplicate words
+        if word.lower() in [w.lower() for w in words]:
+            print("Word already exists. Skipping duplicate.")
+            continue
+            
+        words.append(word) #adds what user input, in the list
+
+    return words
+
+
+def analyze_words(words):
+    if not words:
+        print("No words entered.")
+        return
+
+    longest = max(words, key=len) #finds the maximum words
+    shortest = min(words, key=len) #finds the minimum words
+
+    #calculations
+    total_length = sum(len(word) for word in words)
+    average_length = total_length / len(words)
+
+    vowels = "aeiouAEIOU"
+    vowel_count = sum(1 for word in words if word[0] in vowels)
+
+    print("\n===== WORD LIST ANALYSIS =====")
+    print(f"Total words: {len(words)}")
+    print(f"Longest word: {longest}")
+    print(f"Shortest word: {shortest}")
+    print(f"Average length: {average_length:.2f}")
+    print(f"Words starting with a vowel: {vowel_count}")
+
+
+def main():
+    print("===== WORD LIST ANALYZER =====")
+
+    words = get_words()
+    analyze_words(words)
+
+
+main()
